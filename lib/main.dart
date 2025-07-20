@@ -69,8 +69,17 @@ class _MyHomePageState extends State<MyHomePage> {
         result = secondOperand == 0 ? 0 : (_firstOperand ?? 0) / secondOperand;
         break;
     }
+    String formatted;
+    if (result.truncateToDouble() == result) {
+      formatted = result.toInt().toString();
+    } else {
+      formatted = result
+          .toString()
+          .replaceAll(RegExp(r'0+\$'), '')
+          .replaceAll('.', ',');
+    }
     setState(() {
-      _display = result.toString().replaceAll(RegExp(r'\.0\$'), '');
+      _display = formatted;
       _firstOperand = null;
       _operator = '';
       _shouldClear = true;

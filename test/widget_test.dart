@@ -20,4 +20,28 @@ void main() {
 
     expect(find.text('1'), findsOneWidget);
   });
+
+  testWidgets('Performs integer calculation', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('1'));
+    await tester.tap(find.text('+'));
+    await tester.tap(find.text('1'));
+    await tester.tap(find.text('='));
+    await tester.pump();
+
+    expect(find.text('2'), findsOneWidget);
+  });
+
+  testWidgets('Performs decimal calculation', (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('1'));
+    await tester.tap(find.text('÷'));
+    await tester.tap(find.text('2'));
+    await tester.tap(find.text('='));
+    await tester.pump();
+
+    expect(find.text('0,5'), findsOneWidget);
+  });
 }
